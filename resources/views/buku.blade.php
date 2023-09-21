@@ -17,9 +17,21 @@
                 <td>{{ $buku->penulis}}</td>
                 <td>{{ "Rp ".number_format($buku->harga, 2, ',', '.')}}</td>
                 <td>{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y')}}</td>
+                <td>
+                    <form action="{{ route('buku.destroy', $buku->id) }}" method="post">
+                        @csrf
+                        <button onclick="return confirm('Yakin mau dihapus?')">Hapus</button>
+                    </form>
+
+                    <button><a href="{{ route('buku.edit', $buku->id) }}">Update</a></button>
+
+                </td>
             </tr>
         @endforeach
     </tbody>
 </table>
 <p>jumlah data = {{$jumlahData}}</p>
 <p>total harga = {{$totalHarga}}</p>
+<button>
+<p align="left"><a href="{{ route('buku.create') }}">Tambah Buku</a></p>
+</button>
